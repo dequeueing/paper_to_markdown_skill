@@ -2,15 +2,6 @@
 name: paper-to-markdown
 description: >
   Convert academic papers (PDF) into well-structured Markdown files, with one file per section.
-  Use this skill whenever the user wants to:
-  - Convert a PDF paper to Markdown format
-  - Split a paper's PDF into separate Markdown files by section
-  - Extract and format a paper's content (abstract, introduction, references, appendices, tables, formulas)
-  - Create a clean Markdown representation of an academic paper
-
-  This skill handles the complete workflow: PDF text extraction, structure analysis, section splitting, and Markdown formatting.
-  Works with arXiv papers, conference papers, journal articles, and other academic documents.
-  **Do NOT use Read tool directly on PDF files** - always use pdftotext or similar tools first to extract text content.
 ---
 
 # Paper to Markdown
@@ -96,9 +87,13 @@ Note: Actual structure varies by paper - adapt the pattern matching accordingly.
 
 ### Step 4: Clean and Normalize Text
 
-**IMPORTANT**: Raw text from `pdftotext` often has issues that must be fixed before splitting:
+**Why this matters**: PDF stores text by position, not by paragraph. `pdftotext` extracts by visual line, so word-wrapping, multi-column layouts, and page breaks all produce fragmented lines. Without rebuilding paragraphs first, all downstream analysis is built on broken foundations.
+
+The core principle: **each paragraph must be a single continuous line** — no line breaks mid-paragraph.
 
 1. **Fix broken lines**: Lines may be cut mid-sentence. Join lines that end without proper punctuation (no `.`, `?`, `!`) and don't start with uppercase (likely continuation of previous line).
+
+   **Verification**: After cleaning, every paragraph should be one line. If a paragraph spans multiple lines, keep joining until it ends with punctuation.
 
 2. **Normalize whitespace**: Remove excessive blank lines, trim leading/trailing spaces.
 

@@ -11,7 +11,7 @@ A Claude Code skill for converting academic papers (PDF) into well-structured Ma
 
 ## Installation
 
-### Method 1: Clone and Install
+### Claude Code
 
 ```bash
 # Clone this repository
@@ -22,13 +22,20 @@ cd paper-to-markdown
 cp -r paper-to-markdown ~/.claude/skills/
 ```
 
-### Method 2: Download .skill File
+### GitHub Copilot CLI
 
-Download `paper-to-markdown.skill` from the releases and copy to `~/.claude/skills/`.
+```bash
+# Clone this repository
+git clone https://github.com/YOUR_USERNAME/paper-to-markdown.git
+cd paper-to-markdown
+
+# Install the skill
+cp paper-to-markdown.skill ~/.copilot/skills/
+```
 
 ## Usage
 
-In Claude Code, invoke the skill:
+### Claude Code
 
 ```
 /paper-to-markdown
@@ -38,6 +45,18 @@ Then provide a task like:
 
 ```
 Convert the PDF paper at /path/to/paper.pdf to markdown
+```
+
+### GitHub Copilot CLI
+
+```
+/paper-to-markdown
+```
+
+Then provide your request:
+
+```
+Convert /path/to/paper.pdf to markdown
 ```
 
 The skill will:
